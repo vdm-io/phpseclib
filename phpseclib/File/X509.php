@@ -3361,9 +3361,8 @@ class X509
      * Returns the list of extensions if there are any and false if not
      *
      * @param array $csr optional
-     * @return mixed
      */
-    public function getRequestedCertificateExtensions(array $csr = null)
+    public function getRequestedCertificateExtensions(?array $csr = null)
     {
         if (empty($csr)) {
             $csr = $this->currentCert;
