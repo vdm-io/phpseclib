@@ -126,7 +126,7 @@ U9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ
         $x509->setDN(['cn' => 'website.com']);
         $x509->saveCSR($x509->signCSR(), X509::FORMAT_DER);
         self::assertSame(
-            'MIIBUzCBvwIBADAWMRQwEgYDVQQDDAt3ZWJzaXRlLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAqhirpDtQ3u84WY+vh9KrY05FccEwqbynuHgmdBT6q4tHG9iWX1yfw4GEher1KcJiRvMFUGSo3hnIwzi+VJbLrrBZ3As1gUO0SjVEnrJkETEhpFW9f94/rJGelLVvubtPZRzbI+rUOdbNUj6wgZHnWzX9E6dBmzCQ8keHvU9OGWcCAwEAAaAAMAsGCSqGSIb3DQEBBQOBgQAruS36X6T32X3kim5csJ/0iY+kS8MBt3D3geHLZx6ZAHI7olklEaGONJp+xajT3xMwKS3Anwe8Xpmqcn8+hAOJdZG0xHF2+S/T469UX32uiPtCiNvRC2RJo57wMj3X+2BCjC0WseYb6WHurnhu7u8zWcA3TEGyxyo+FDjMjFWsZA==',
+            'MIIBVTCBvwIBADAWMRQwEgYDVQQDDAt3ZWJzaXRlLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAqhirpDtQ3u84WY+vh9KrY05FccEwqbynuHgmdBT6q4tHG9iWX1yfw4GEher1KcJiRvMFUGSo3hnIwzi+VJbLrrBZ3As1gUO0SjVEnrJkETEhpFW9f94/rJGelLVvubtPZRzbI+rUOdbNUj6wgZHnWzX9E6dBmzCQ8keHvU9OGWcCAwEAAaAAMA0GCSqGSIb3DQEBBQUAA4GBACu5LfpfpPfZfeSKblywn/SJj6RLwwG3cPeB4ctnHpkAcjuiWSURoY40mn7FqNPfEzApLcCfB7xemapyfz6EA4l1kbTEcXb5L9Pjr1Rffa6I+0KI29ELZEmjnvAyPdf7YEKMLRax5hvpYe6ueG7u7zNZwDdMQbLHKj4UOMyMVaxk',
             base64_encode($x509->saveCSR($x509->signCSR(), X509::FORMAT_DER))
         );
     }
@@ -184,7 +184,7 @@ yGSdZsGMatjn2ld+Ndj3uAYlujyKlqGcAOb53bu+PswH5KXTJJquOJH84UoKraog
         $this->assertTrue(boolval($x509->getPublicKey()->getPadding() & RSA::SIGNATURE_PSS));
     }
 
-    public function testAttributes()
+    public function testAttributes(): void
     {
         $private = RSA::createKey();
         $private = $private->withHash('sha256');
@@ -205,7 +205,7 @@ yGSdZsGMatjn2ld+Ndj3uAYlujyKlqGcAOb53bu+PswH5KXTJJquOJH84UoKraog
         $extensions = [
             ['extnId' => 'id-ce-basicConstraints', 'critical' => true, 'extnValue' => ['cA' => false]],
             ['extnId' => 'id-ce-keyUsage', 'critical' => true, 'extnValue' => ['digitalSignature', 'keyEncipherment']],
-            ['extnId' => 'id-ce-extKeyUsage', 'extnValue' => ['id-kp-serverAuth', 'id-kp-clientAuth']]
+            ['extnId' => 'id-ce-extKeyUsage', 'extnValue' => ['id-kp-serverAuth', 'id-kp-clientAuth']],
         ];
         $subject->setAttribute('pkcs-9-at-extensionRequest', $extensions);
 
